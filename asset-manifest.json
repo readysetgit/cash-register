@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/cash-register/static/css/main.28169883.css",
-    "main.js": "/cash-register/static/js/main.086cd076.js",
+    "main.css": "/cash-register/static/css/main.514d2e2b.css",
+    "main.js": "/cash-register/static/js/main.b7582d1a.js",
     "static/js/787.b907317a.chunk.js": "/cash-register/static/js/787.b907317a.chunk.js",
     "index.html": "/cash-register/index.html",
-    "main.28169883.css.map": "/cash-register/static/css/main.28169883.css.map",
-    "main.086cd076.js.map": "/cash-register/static/js/main.086cd076.js.map",
+    "main.514d2e2b.css.map": "/cash-register/static/css/main.514d2e2b.css.map",
+    "main.b7582d1a.js.map": "/cash-register/static/js/main.b7582d1a.js.map",
     "787.b907317a.chunk.js.map": "/cash-register/static/js/787.b907317a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.28169883.css",
-    "static/js/main.086cd076.js"
+    "static/css/main.514d2e2b.css",
+    "static/js/main.b7582d1a.js"
   ]
 }
