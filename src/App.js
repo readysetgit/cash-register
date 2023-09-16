@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import { errorToast, successToast } from './services/toast';
 import AddRemoveMoney from './components/AddRemoveMoney';
 import TransactionHistory from './components/TransactionHistory'; 
+import Footer from './components/Footer';
 
 function App() {
   const initialRegisterState = {
@@ -37,7 +38,7 @@ function App() {
     const updatedTotal = calculateTotal(updatedDenominations);
 
     setRegisterState({ total: updatedTotal, denominations: updatedDenominations });
-    addTransactionToHistory('Add Money', calculateTotal(updatedDenominations));
+    addTransactionToHistory('Added', calculateTotal(updatedDenominations));
     successToast('Added money to the register!')
   };
 
@@ -51,7 +52,7 @@ function App() {
     const updatedTotal = calculateTotal(updatedDenominations);
 
     setRegisterState({ total: updatedTotal, denominations: updatedDenominations });
-    addTransactionToHistory('Remove Money', calculateTotal(updatedDenominations));
+    addTransactionToHistory('Removed', calculateTotal(updatedDenominations));
     successToast('Money removed from register!')
   };
 
@@ -94,7 +95,7 @@ function App() {
       total: registerState.total - amountToRemove,
       denominations: availableDenominations, // Update denominations here
     });
-    addTransactionToHistory('Dispense Change', amountToRemove);
+    addTransactionToHistory('Change', amountToRemove);
     successToast('Change Dispensed!')
 
   };
@@ -132,6 +133,7 @@ function App() {
       <AddRemoveMoney onAddMoney={addMoneyToRegister} onRemoveMoney={removeMoneyFromRegister} denominations={registerState.denominations}/>
       <ChangeMoney onChangeMoney={dispenseChange} total={registerState.total} denominations={registerState.denominations} />
       <TransactionHistory transactions={transactionHistory} />
+      <Footer />
       <ToastContainer />
 
     </div>
