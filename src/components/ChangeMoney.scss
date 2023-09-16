@@ -1,0 +1,23 @@
+.box-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.change-money-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    align-items: center;
+    background-color: #FAFAFA;
+    padding: 20px;
+    border: 1px solid #E7EDE2;
+    max-width: 85%;
+    width: 400px;
+    margin: auto;
+    margin-top:100px;
+}
+
+.x-bills.large {
+    font-size:20px;
+}
