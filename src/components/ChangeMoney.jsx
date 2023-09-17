@@ -18,23 +18,28 @@ function ChangeMoney({ onChangeMoney, total }) {
 
   return (
     <div className="change-money-container">
-      <h2 className="box-title">Request Change</h2>
-      <div className="row-container">
-        <span className="x-bills large">$</span>
-        <input
-          className="count-input"
-          type="number"
-          value={changeAmount}
-          onChange={handleChange}
-        />
+      <div className='p20'>
+        <h2 className="box-title">Request Change</h2>
+        <div className="row-container">
+          <span className="x-bills large">$</span>
+          <input
+            className="count-input"
+            type="number"
+            value={changeAmount}
+            onChange={handleChange}
+          />
+        </div>
       </div>
-      <button
-        className="register-btn"
-        disabled={!changeAmount}
-        onClick={handleDispenseChange}
-      >
-        Dispense Change
-      </button>
+      <div className="change-money-bottom">
+        <button
+          className="register-btn dispense-change-btn"
+          disabled={!changeAmount}
+          onClick={handleDispenseChange}
+        >
+          Dispense Change
+        </button>
+      </div>
+
     </div>
   );
 }
