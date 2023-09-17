@@ -18,9 +18,9 @@ function AddRemoveMoney({ onAddMoney,onRemoveMoney, denominations }) {
     let { name, value } = event.target;
 
     // Prevent NAN values
-    if (!value) {
-        value = 0
-    }
+    // if (!value) {
+    //     value = 0
+    // }
     // Prevent negative values
     const newValue = Math.max(0, parseInt(value, 10));
     setAmountsToAdd((prevAmounts) => ({
@@ -138,10 +138,10 @@ function AddRemoveMoney({ onAddMoney,onRemoveMoney, denominations }) {
         ))}
       </div>
       <div className='actions-container'>
-        <button className="register-btn add-money-btn" disabled={Object.values(amountsToAdd).every((value) => value === 0)} onClick={handleAddMoney}>
+        <button className="register-btn add-money-btn" disabled={Object.values(amountsToAdd).every((value) => !value )} onClick={handleAddMoney}>
             Add Money
         </button>
-        <button className="register-btn remove-money-btn" disabled={Object.values(amountsToAdd).every((value) => value === 0)} onClick={handleRemoveMoney}>
+        <button className="register-btn remove-money-btn" disabled={Object.values(amountsToAdd).every((value) => !value )} onClick={handleRemoveMoney}>
             Remove Money
         </button>
       </div>
