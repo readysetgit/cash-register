@@ -20,7 +20,7 @@ Added 2 bonus features for good measure -
 
 ## Initial Mockups
 Here are some mockups on a borrowed iPad:
-- ![Wireframe 1](./design/wireframe-1.png)
+- ![Wireframe 1](./design/initial-design.jpg)
 
 
 
