@@ -1,33 +1,20 @@
-import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import React from "react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import ChangeMoney from "../components/ChangeMoney";
 
-// test('dispenses change correctly', async () => {
-//   const mockChangeMoney = jest.fn();
-//   const { getByLabelText, getByText } = render(
-//     <ChangeMoney onChangeMoney={mockChangeMoney} total={32} />
-//   );
+describe("ChangeMoney component", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-//   fireEvent.change(getByLabelText('Change Amount'), { target: { value: '11' } });
+  it("should not be able to click dispense change button if amount is 0", async () => {
+    const onDispenseChange = jest.fn();
 
-//   fireEvent.click(getByText('Dispense Change'));
+    render(<ChangeMoney onDispenseChange={onDispenseChange} total={0} />);
 
-//   await waitFor(() => {
-//     expect(mockChangeMoney).toHaveBeenCalledWith(11);
-//   });
-// });
+    const dispenseChangeButton = screen.getByTestId("dispense-change-button");
+    await fireEvent.click(dispenseChangeButton);
 
-// test('raises error for unmakeable change', async () => {
-//   const mockChangeMoney = jest.fn();
-//   const { getByLabelText, getByText } = render(
-//     <ChangeMoney onChangeMoney={mockChangeMoney} total={32} />
-//   );
-
-//   fireEvent.change(getByLabelText('Change Amount'), { target: { value: '14' } });
-
-//   fireEvent.click(getByText('Dispense Change'));
-
-//   await waitFor(() => {
-//     expect(mockChangeMoney).toHaveBeenCalledWith(14);
-//     expect(getByText('Sorry, cannot make change.')).toBeInTheDocument();
-//   });
-// });
+    expect(onDispenseChange).not.toHaveBeenCalled();
+  });
+});

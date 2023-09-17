@@ -73,31 +73,16 @@
     }
   }
   
-
-//   .rotated-text {
-//     transform: rotate(-90deg); 
-//     // transform-origin: left top; 
-//     transform-origin: right bottom;
-//     position: absolute; 
-//     left: 0; 
-//     top: 0; 
-//     white-space: nowrap; 
-//     color: white;
-//     font-size: 2em;
-//   }
-
-  // Media query for larger screens
   @media only screen and (min-width: 1024px) {
     .the-register {
       flex-direction: row;
       gap: 30px;
     }
   }
-  
-  // Media query for smaller screens
+
   @media only screen and (max-width: 480px) {
     .the-register .total-amount-text .actual-dollars {
-      font-size: 4em; /* Adjust the font size as needed */
+      font-size: 4em; 
     }
   }
   

@@ -25,6 +25,7 @@ function ChangeMoney({ onChangeMoney, total }) {
           <input
             className="count-input"
             type="number"
+            data-testid="change-amount-input"
             value={changeAmount}
             onChange={handleChange}
           />
@@ -32,6 +33,7 @@ function ChangeMoney({ onChangeMoney, total }) {
       </div>
       <div className="change-money-bottom">
         <button
+          data-testid="dispense-change-button"
           className="register-btn dispense-change-btn"
           disabled={!changeAmount}
           onClick={handleDispenseChange}

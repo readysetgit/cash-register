@@ -2,8 +2,11 @@ import React from 'react';
 import "./TransactionHistory.scss";
 import Download from "@mui/icons-material/Download";
 import { IconButton, Button } from "@mui/material";
+import {downloadStringAsCSV} from "../utils/DownloadStringAsCSV";
+import {formatTimestamp} from "../utils/FormatTimeStamp";
 
-function downloadCSV(transactions) {
+
+const downloadCSV = (transactions) => {
   // Create a CSV string with a header row
   let csvContent = "Type,Amount,Date,Change Dispensed\n";
 
@@ -17,29 +20,10 @@ function downloadCSV(transactions) {
     csvContent += `${type},${changeInAmount},${formattedTimestamp},"${changeDispensed}"\n`;
   });
 
-  // Create a Blob containing the CSV data
-  const blob = new Blob([csvContent], { type: "text/csv" });
-
-  // Create a download link and trigger the download
-  const link = document.createElement("a");
-  link.href = window.URL.createObjectURL(blob);
-  link.download = "transactions.csv";
-  link.click();
-}
-
-function formatTimestamp(timestamp) {
-  const date = new Date(timestamp);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getSeconds().toString().padStart(2, '0');
-  return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
+  downloadStringAsCSV(csvContent)
 }
 
 function TransactionHistory({ transactions }) {
-  // Reverse the transactions array to display them in reverse order
   const reversedTransactions = [...transactions].reverse();
 
   return (
@@ -95,15 +79,14 @@ function TransactionHistory({ transactions }) {
   );
 }
 
-// Define a function to format removed denominations
-function formatRemovedDenominations(removedDenominations) {
-  return Object.keys(removedDenominations).map((denomination) => (
-    `${removedDenominations[denomination]} x $${denomination}`
-  )).join(', ');
+const formatRemovedDenominations = (removedDenominations) => {
+  return Object.keys(removedDenominations)
+    .map((denomination) => `${removedDenominations[denomination]} x $${denomination}`)
+    .join(', ');
 }
 
-// Define a function to get the transaction class name based on its type
-function getTransactionClassName(type) {
+
+const getTransactionClassName = (type) => {
   switch (type) {
     case 'Added':
       return 'added-transaction';
@@ -114,10 +97,9 @@ function getTransactionClassName(type) {
     default:
       return '';
   }
-}
+};
 
-// Define a function to get the amount color class based on its type
-function getAmountColorClass(type) {
+const getAmountColorClass = (type) => {
   switch (type) {
     case 'Added':
       return 'added-amount';
@@ -128,6 +110,7 @@ function getAmountColorClass(type) {
     default:
       return '';
   }
-}
+};
+
 
 export default TransactionHistory;

@@ -1,37 +1,32 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Register from '../components/Register';
-import { DENOMINATIONS, DENOMINATIONS_0, DENOMINATIONS_50, TOTAL_0, TOTAL_50 } from '../mocks/constants';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Register from "../components/Register";
 
-describe('Register is working',  () => {
-    it('Shows initial amount to be $0',  () => {
-      render(<Register total={TOTAL_0} denominations={DENOMINATIONS_0}/>)
-      const totalText = screen.getByTestId('total-display')
-      expect(totalText).toBeVisible()
-    })
+describe("Register component", () => {
+  it("should display the total amount correctly", () => {
+    const total = 1000000; 
+    const denominations = { 1: 10, 5: 20, 10: 15, 20: 5 };
+    render(<Register total={total} denominations={denominations} />);
+    
+    const totalDisplay = screen.getByTestId("total-display");
+    expect(totalDisplay).toHaveTextContent("1.0M");
+  });
 
-    it('Shows all the denominations correctly', () => {
-      render(<Register total={TOTAL_50} denominations={DENOMINATIONS_50}/>)
-      const totalText = screen.getByTestId('total-display')
-      expect(totalText).toBeVisible()
-    })
-})
-
-
-// test('renders register with initial values', () => {
-//   // Render the Register component with initial state
-//   render(<Register total={0} denominations={{ 20: 0, 10: 0, 5: 0, 2: 0, 1: 0 }} />);
-
-//   // Assert that the initial values are displayed correctly
-//   expect(screen.getByText('Total: $0')).toBeInTheDocument();
-//   expect(screen.getByText('0x20 0x10 0x5 0x2 0x1')).toBeInTheDocument();
-// });
-
-// test('renders register with updated values', () => {
-//   // Render the Register component with updated state
-//   render(<Register total={128} denominations={{ 20: 2, 10: 4, 5: 6, 2: 4, 1: 10 }} />);
-
-//   // Assert that the updated values are displayed correctly
-//   expect(screen.getByText('Total: $128')).toBeInTheDocument();
-//   expect(screen.getByText('2x20 4x10 6x5 4x2 10x1')).toBeInTheDocument();
-// });
+  it("should display denomination counts correctly", () => {
+    const total = 50000; 
+    const denominations = { 1: 10, 5: 20, 10: 15, 20: 5 };
+    render(<Register total={total} denominations={denominations} />);
+    
+    expect(screen.getByTestId("denom-type-1")).toHaveTextContent("$1");
+    expect(screen.getByTestId("denom-count-1")).toHaveTextContent("x10");
+    
+    expect(screen.getByTestId("denom-type-5")).toHaveTextContent("$5");
+    expect(screen.getByTestId("denom-count-5")).toHaveTextContent("x20");
+    
+    expect(screen.getByTestId("denom-type-10")).toHaveTextContent("$10");
+    expect(screen.getByTestId("denom-count-10")).toHaveTextContent("x15");
+    
+    expect(screen.getByTestId("denom-type-20")).toHaveTextContent("$20");
+    expect(screen.getByTestId("denom-count-20")).toHaveTextContent("x5");
+  });
+});
