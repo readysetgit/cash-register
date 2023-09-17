@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Register from './components/Register';
-import AddMoney from './components/AddMoney';
-import RemoveMoney from './components/RemoveMoney';
+
 import ChangeMoney from './components/ChangeMoney';
 import "./App.scss";
 import { ToastContainer } from 'react-toastify';
@@ -23,10 +22,16 @@ function App() {
   const [registerState, setRegisterState] = useState(initialRegisterState);
   const [transactionHistory, setTransactionHistory] = useState([]); // State to store transaction history
 
-  const addTransactionToHistory = (type, amount, changeInAmount) => {
-    const transaction = { type, amount, changeInAmount, timestamp: new Date().toLocaleString() }; // Add a timestamp
+  const addTransactionToHistory = (type, amount, changeInAmount, removedDenominations) => {
+    let transaction
+    if (removedDenominations) {
+       transaction = { type, amount, changeInAmount, removedDenominations: removedDenominations, timestamp: new Date().toLocaleString() }; // Add a timestamp
+    } else {
+       transaction = { type, amount, changeInAmount, timestamp: new Date().toLocaleString() }; // Add a timestamp
+    }
     setTransactionHistory([...transactionHistory, transaction]);
   };
+
 
   const addMoneyToRegister = (amountsToAdd) => {
     const updatedDenominations = { ...registerState.denominations };
@@ -70,14 +75,19 @@ function App() {
   const dispenseChange = (changeAmount) => {
     const availableDenominations = { ...registerState.denominations };
     const changeDenominations = {};
-    const amountToRemove = changeAmount
-
+    const amountToRemove = changeAmount;
+  
     // Create an array of available denominations sorted in descending order
-    const sortedDenominations = Object.keys(availableDenominations).map(Number).sort((a, b) => b - a);
+    const sortedDenominations = Object.keys(availableDenominations)
+      .map(Number)
+      .sort((a, b) => b - a);
     for (const denomination of sortedDenominations) {
       if (changeAmount <= 0) break; // Stop if we've dispensed the required change
   
-      const count = Math.min(availableDenominations[denomination], Math.floor(changeAmount / denomination));
+      const count = Math.min(
+        availableDenominations[denomination],
+        Math.floor(changeAmount / denomination)
+      );
   
       if (count > 0) {
         changeDenominations[denomination] = count;
@@ -88,29 +98,52 @@ function App() {
   
     // Check if change can be made, and if not, handle the error case
     if (changeAmount > 0) {
-      errorToast('Sorry, cannot make change with available denominations.')
+      errorToast("Sorry, cannot make change with available denominations.");
       return;
     }
-
+  
+    // Create an object to store the denominations removed
+    const removedDenominations = {};
+    for (const denomination in changeDenominations) {
+      removedDenominations[denomination] =
+        changeDenominations[denomination];
+    }
+  
     // Update the state with the new cash register state
     setRegisterState({
       total: registerState.total - amountToRemove,
       denominations: availableDenominations, // Update denominations here
     });
+  
+    // Add a transaction for the change dispensed and the denominations removed
+    addTransactionToHistory(
+      'Change',
+      registerState.total - amountToRemove,
+      amountToRemove,
+      removedDenominations // Pass removed denominations here
+    );
+  
 
-    addTransactionToHistory('Change', registerState.total - amountToRemove, amountToRemove);
-    successToast('Change Dispensed!')
+      // Prepare a string to show the dispensed change
+    const dispensedChangeString = Object.keys(removedDenominations).map((denomination) => (
+      `${removedDenominations[denomination]} x $${denomination}`
+    )).join(', ');
 
+    successToast(`Change Dispensed: ${dispensedChangeString}`);
   };
 
   return (
     <div className="App">
       {/* <h1>Cash Register Application</h1> */}
       <Register total={registerState.total} denominations={registerState.denominations} />
-      {/* <AddMoney onAddMoney={addMoneyToRegister} />
-      <RemoveMoney onRemoveMoney={removeMoneyFromRegister} denominations={registerState.denominations} /> */}
-      <AddRemoveMoney onAddMoney={addMoneyToRegister} onRemoveMoney={removeMoneyFromRegister} denominations={registerState.denominations}/>
-      <ChangeMoney onChangeMoney={dispenseChange} total={registerState.total} denominations={registerState.denominations} />
+      <div className="all-actions-container">
+
+        <AddRemoveMoney onAddMoney={addMoneyToRegister} onRemoveMoney={removeMoneyFromRegister} denominations={registerState.denominations}/>
+        <ChangeMoney onChangeMoney={dispenseChange} total={registerState.total} denominations={registerState.denominations} />
+
+      </div>
+
+     
       <TransactionHistory transactions={transactionHistory} />
       <Footer />
       <ToastContainer />

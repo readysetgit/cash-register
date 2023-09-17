@@ -1,4 +1,17 @@
-// Base styles
+.the-cash-register {
+    color: #a7a7a7;
+    top: 0px;
+    background-color: #2B3134;
+    padding: 20px;
+    text-align: center;
+    margin-block: 0;
+    font-size: 3em;
+    font-weight: 100;
+}
+
+
+
+
 .the-register {
     background-color: #2B3134;
     padding: 20px;
@@ -8,6 +21,14 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
+    .text-saying-total {
+        font-family: 'Inter', sans-serif;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        color: #a7a7a7;
+        text-align: left;
+        transform: translate(0px,35px);
+    }
     .total-amount-text {
       display: flex;
       align-items: center;
@@ -52,6 +73,19 @@
     }
   }
   
+
+//   .rotated-text {
+//     transform: rotate(-90deg); 
+//     // transform-origin: left top; 
+//     transform-origin: right bottom;
+//     position: absolute; 
+//     left: 0; 
+//     top: 0; 
+//     white-space: nowrap; 
+//     color: white;
+//     font-size: 2em;
+//   }
+
   // Media query for larger screens
   @media only screen and (min-width: 1024px) {
     .the-register {

@@ -14,3 +14,21 @@
   flex-direction: column;
 }
 
+.all-actions-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+@media only screen and (min-width: 1024px){
+  .all-actions-container {
+    flex-direction: row;
+    gap: 50px;
+    align-items: flex-start;
+
+  }
+}
