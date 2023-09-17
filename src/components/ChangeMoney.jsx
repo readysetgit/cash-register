@@ -5,13 +5,14 @@ function ChangeMoney({ onChangeMoney, total }) {
   const [changeAmount, setChangeAmount] = useState(0);
 
   const handleChange = (event) => {
-    // Ensure that the input value is rounded down to the nearest whole number
-    const newValue = Math.max(0, Math.floor(event.target.value));
+    let { name, value } = event.target;
+    const newValue = Math.max(0, parseInt(value, 10));
+
     setChangeAmount(newValue);
   };
 
   const handleDispenseChange = () => {
-    onChangeMoney(changeAmount); // No need to parse as it's already a number
+    onChangeMoney(changeAmount); 
     setChangeAmount(0);
   };
 
@@ -25,7 +26,6 @@ function ChangeMoney({ onChangeMoney, total }) {
           type="number"
           value={changeAmount}
           onChange={handleChange}
-          
         />
       </div>
       <button

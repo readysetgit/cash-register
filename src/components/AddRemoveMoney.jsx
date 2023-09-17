@@ -17,12 +17,7 @@ function AddRemoveMoney({ onAddMoney,onRemoveMoney, denominations }) {
   const handleChange = (event) => {
     let { name, value } = event.target;
 
-    // Prevent NAN values
-    // if (!value) {
-    //     value = 0
-    // }
-    // Prevent negative values
-    const newValue = Math.max(0, parseInt(value, 10)); // Prevent NaN values
+    const newValue = Math.max(0, parseInt(value, 10));
     setAmountsToAdd((prevAmounts) => ({
       ...prevAmounts,
       [name]: newValue,
