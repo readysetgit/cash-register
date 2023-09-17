@@ -13,39 +13,53 @@ function formatTimestamp(timestamp) {
 }
 
 function TransactionHistory({ transactions }) {
-    // Reverse the transactions array to display them in reverse order
-    const reversedTransactions = [...transactions].reverse();
+  // Reverse the transactions array to display them in reverse order
+  const reversedTransactions = [...transactions].reverse();
 
-    return (
-      <div className="transaction-history">
-        <h2>Transaction History</h2>
-        <div className="all-transactions">
-          {reversedTransactions.map((transaction, index) => (
-            <div className={`transaction-pane ${getTransactionClassName(transaction.type)}`} key={index}>
-              <span className="transaction-type">{transaction.type}</span>
-              <div className="money-time">
-                <span className="transaction-amount">${transaction.changeInAmount}</span>
-                <span className="transaction-timestamp">{formatTimestamp(transaction.timestamp)}</span>
-              </div>
+  return (
+    <div className="transaction-history">
+      <h2>Transaction History</h2>
+      <div className="all-transactions">
+        {reversedTransactions.map((transaction, index) => (
+          <div className={`transaction-pane ${getTransactionClassName(transaction.type)}`} key={index}>
+            <span className={`transaction-type ${getAmountColorClass(transaction.type)}`}>{transaction.type}</span>
+            <div className="money-time">
+              <span className={`transaction-amount ${getAmountColorClass(transaction.type)}`}>${transaction.changeInAmount}</span>
+              <span className="transaction-timestamp">{formatTimestamp(transaction.timestamp)}</span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    );
+    </div>
+  );
+}
+
+// Define a function to get the transaction class name based on its type
+function getTransactionClassName(type) {
+  switch (type) {
+    case 'Added':
+      return 'added-transaction';
+    case 'Removed':
+      return 'removed-transaction';
+    case 'Change':
+      return 'changed-transaction';
+    default:
+      return '';
   }
-  
-  // Define a function to get the transaction class name based on its type
-  function getTransactionClassName(type) {
-    switch (type) {
-      case 'Added':
-        return 'added-transaction';
-      case 'Removed':
-        return 'removed-transaction';
-      case 'Change':
-        return 'changed-transaction';
-      default:
-        return '';
-    }
+}
+
+// Define a function to get the amount color class based on its type
+function getAmountColorClass(type) {
+  switch (type) {
+    case 'Added':
+      return 'added-amount';
+    case 'Removed':
+      return 'removed-amount';
+    case 'Change':
+      return 'changed-amount';
+    default:
+      return '';
   }
-  
-  export default TransactionHistory;
+}
+
+export default TransactionHistory;

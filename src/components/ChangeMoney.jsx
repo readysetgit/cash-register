@@ -25,7 +25,7 @@ function ChangeMoney({ onChangeMoney, total }) {
           type="number"
           value={changeAmount}
           onChange={handleChange}
-          step="1" // Enforce whole number values
+          
         />
       </div>
       <button

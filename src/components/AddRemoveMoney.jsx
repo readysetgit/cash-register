@@ -22,7 +22,7 @@ function AddRemoveMoney({ onAddMoney,onRemoveMoney, denominations }) {
     //     value = 0
     // }
     // Prevent negative values
-    const newValue = Math.max(0, parseInt(value, 10));
+    const newValue = Math.max(0, parseInt(value, 10)); // Prevent NaN values
     setAmountsToAdd((prevAmounts) => ({
       ...prevAmounts,
       [name]: newValue,
@@ -59,7 +59,7 @@ function AddRemoveMoney({ onAddMoney,onRemoveMoney, denominations }) {
     // Calculate the total amount
     const calculatedTotal = Object.keys(amountsToAdd).reduce(
       (total, denomination) =>
-        total + amountsToAdd[denomination] * parseInt(denomination, 10),
+        total + (amountsToAdd[denomination] || 0) * parseInt(denomination, 10),
       0
     );
     setTotalAmount(calculatedTotal);

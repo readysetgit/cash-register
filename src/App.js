@@ -32,7 +32,7 @@ function App() {
     const updatedDenominations = { ...registerState.denominations };
 
     for (const denomination in amountsToAdd) {
-      updatedDenominations[denomination] += parseInt(amountsToAdd[denomination], 10);
+      updatedDenominations[denomination] += (parseInt(amountsToAdd[denomination], 10) || 0);
     }
 
 
@@ -48,7 +48,7 @@ function App() {
     const updatedDenominations = { ...registerState.denominations };
 
     for (const denomination in amountsToRemove) {
-      updatedDenominations[denomination] -= parseInt(amountsToRemove[denomination], 10);
+      updatedDenominations[denomination] -= (parseInt(amountsToRemove[denomination], 10) || 0);
     }
 
     const updatedTotal = calculateTotal(updatedDenominations);
@@ -62,7 +62,7 @@ function App() {
   const calculateTotal = (denominations) => {
     let total = 0;
     for (const denomination in denominations) {
-      total += denomination * denominations[denomination];
+      total += denomination * (denominations[denomination] || 0);
     }
     return total;
   };
@@ -98,34 +98,10 @@ function App() {
       denominations: availableDenominations, // Update denominations here
     });
 
-    addTransactionToHistory('Change', amountToRemove, changeAmount);
+    addTransactionToHistory('Change', registerState.total - amountToRemove, amountToRemove);
     successToast('Change Dispensed!')
 
   };
-  // Function to check if change can be made with available denominations
-  // const canMakeChange = (denominations, changeAmount) => {
-  //   // Create an array to track if a certain change amount can be made
-  //   const dp = new Array(changeAmount + 1).fill(false);
-  
-  //   // Zero change can always be made
-  //   dp[0] = true;
-  
-  //   // Iterate through each denomination
-  //   for (const denomination in denominations) {
-  //     let count = denominations[denomination]; 
-      
-  //     // Update dp array based on the current denomination
-  //     for (let i = changeAmount; i >= denomination; i--) {
-  //       if (dp[i - denomination] && count > 0) {
-  //         dp[i] = true;
-  //         count--;
-  //       }
-  //     }
-  //   }
-  
-  //   // The changeAmount can be made if dp[changeAmount] is true
-  //   return dp[changeAmount];
-  // };
 
   return (
     <div className="App">
