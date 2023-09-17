@@ -6,13 +6,13 @@ The past 48 hours have been REALLY fun
 - [Cash Register App](#cash-register-app)
   - [Table of Contents](#table-of-contents)
   - [Hosted Web App](#hosted-web-app)
-      - [Features](#features)
-        - [Initial Mockups](#initial-mockups)
+  - [Features](#features)
+  - [Initial Mockups](#initial-mockups)
 
 ## Hosted Web App
 You can access the hosted Cash Register App by following this [link](https://readysetgit.github.io/cash-register/).
 
-#### Features
+## Features
 
 The Cash Register App offers the following features:
 
@@ -27,7 +27,7 @@ The Cash Register App offers the following features:
 The Cash Register App aims to simplify cash management and make it efficient for both personal and business use.
 
 
-##### Initial Mockups
+## Initial Mockups
 Here are some mockups on a borrowed iPad:
 - ![Wireframe 1](./design/wireframe-1.png)
 - ![Wireframe 2](./design/wireframe-2.png)
