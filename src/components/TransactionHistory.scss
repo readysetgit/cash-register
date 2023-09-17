@@ -14,6 +14,7 @@
 .history-header {
     padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     background-color: #2B3134;
@@ -99,4 +100,10 @@
 
 .change-dispensed {
     color: hsl(0, 65%, 65%); 
+}
+
+@media only screen and (min-width:768px) {
+    .history-header {
+        flex-direction: row;
+    }
 }
