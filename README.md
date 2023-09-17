@@ -14,8 +14,8 @@ To make your life easier, I've hosted the webapp on this [link](https://readyset
 
 ## Bonus Features
 Added 2 bonus features for good measure - 
-- **Transactions** You can now view all past transactions!
-- **Download Transactions** If the last one wasn't enough, here's a download button to go with it!!!
+- **Transactions** - You can now view all past transactions!
+- **Download Transactions** - If the last one wasn't enough, here's a download button to go with it!!!
 
 
 ## Initial Mockups
