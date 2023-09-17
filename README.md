@@ -10,7 +10,7 @@ The past 48 hours have been REALLY fun
   - [Initial Mockups](#initial-mockups)
 
 ## Hosted Web App
-You can access the hosted Cash Register App by following this [link](https://readysetgit.github.io/cash-register/).
+To make your life easier, I've hosted the webapp on this [link](https://readysetgit.github.io/cash-register/).
 
 ## Bonus Features
 Added 2 bonus features for good measure - 
