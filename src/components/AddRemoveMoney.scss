@@ -5,7 +5,6 @@
 
     align-items: center;
     background-color: #FAFAFA;
-    padding: 20px;
     border: 1px solid #E7EDE2;
     max-width: 85%;
     width: 400px;
@@ -55,12 +54,32 @@
     }
 }
 
+.decrease-btn , .increase-btn {
+    color: #2b3134 !important;
+
+    &:disabled {color:rgba(0, 0, 0, 0.26) !important}
+}
 .actions-container {
     display: flex;
     gap: 5px;
     justify-content: center;
 }
 
+.top-section {
+    padding:20px;
+}
+.bottom-section {
+    background-color: #2B3134;
+    padding:20px;
+    width: 100%;
+}
+
+.total-money {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #7EC636;
+    text-align: center;
+}
 
 .register-btn {
     border-radius: 6px;
@@ -76,14 +95,16 @@
     &:disabled {
         background-color: hsl(200, 9%, 80%);
     }
-  }
+}
 
 
   .add-money-btn {
-    background-color: 	hsl(120, 77%, 46%);
+    background-color: 	#7EC636;
 
     &:disabled {
         background-color: 	hsl(120, 77%, 80%);
+        background-color: 	#cecece;
+
     }
   }
 
@@ -91,6 +112,8 @@
     background-color: hsl(0, 65%, 65%);
 
     &:disabled {
-        background-color: hsl(0, 65%, 80%);;
+        background-color: hsl(0, 65%, 80%);
+        background-color: 	#cecece;
+
     }
   }
