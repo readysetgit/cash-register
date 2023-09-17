@@ -1,4 +1,3 @@
-// TransactionHistory.js
 import React from 'react';
 import "./TransactionHistory.scss";
 
@@ -14,15 +13,18 @@ function formatTimestamp(timestamp) {
 }
 
 function TransactionHistory({ transactions }) {
+    // Reverse the transactions array to display them in reverse order
+    const reversedTransactions = [...transactions].reverse();
+
     return (
       <div className="transaction-history">
         <h2>Transaction History</h2>
         <div className="all-transactions">
-          {transactions.map((transaction, index) => (
+          {reversedTransactions.map((transaction, index) => (
             <div className={`transaction-pane ${getTransactionClassName(transaction.type)}`} key={index}>
               <span className="transaction-type">{transaction.type}</span>
               <div className="money-time">
-                <span className="transaction-amount">${transaction.amount}</span>
+                <span className="transaction-amount">${transaction.changeInAmount}</span>
                 <span className="transaction-timestamp">{formatTimestamp(transaction.timestamp)}</span>
               </div>
             </div>

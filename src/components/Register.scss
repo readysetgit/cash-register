@@ -1,3 +1,4 @@
+// Base styles
 .the-register {
     background-color: #2B3134;
     padding: 20px;
@@ -8,64 +9,61 @@
     align-items: center;
     gap: 5px;
     .total-amount-text {
-        display: flex;
-        align-items: center;
-        font-weight: 400;
-        justify-content: center;
-    
-        .dollar-sign {
-            vertical-align: center;
-            text-align: center;
-            font-size: 5em;
-            color: #7EC636;
-            font-weight: bold;
-        }
-    
-        .actual-dollars {
-            color: #7EC636;
-            font-size: 6em;
-            font-weight: bold;
-        }
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      justify-content: center;
+      .dollar-sign {
+        vertical-align: center;
+        text-align: center;
+        font-size: 5em;
+        color: #7EC636;
+        font-weight: bold;
+      }
+      .actual-dollars {
+        color: #7EC636;
+        font-size: 6em;
+        font-weight: bold;
+      }
     }
-    
     .all-denoms {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      font-size: 10px;
+      color: #A7A7A7;
+      .denom-container {
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        font-size: 10px;
-        color: #A7A7A7;
-        .denom-container {
-            display: flex;
-            flex-direction: row;
-            gap: 5px;
-            .denom-count {
-                text-align: center;  
-                font-size: 2em;
-                // font-family: monospace;
-                // &.non-zero {color:#7EC636}  
-                justify-self: flex-end;
-                align-self: flex-end;
-                align-items: flex-end;
-            }
-    
-            .denom-type {
-                // border: 1px solid #262626;
-                // padding: 2px 10px;
-                font-size: 2em;
-                // font-family: roboto;
-                color: #7EC636;
-                text-align: center;
-            }
-        }
-    }
-}
-
-
-@media only screen and (min-width: 1024px) {
-    .the-register {
         flex-direction: row;
-        gap: 30px;
+        gap: 5px;
+        .denom-count {
+          text-align: center;
+          font-size: 2em;
+          justify-self: flex-end;
+          align-self: flex-end;
+          align-items: flex-end;
+        }
+        .denom-type {
+          font-size: 2em;
+          color: #7EC636;
+          text-align: center;
+        }
+      }
     }
-}
-
-
+  }
+  
+  // Media query for larger screens
+  @media only screen and (min-width: 1024px) {
+    .the-register {
+      flex-direction: row;
+      gap: 30px;
+    }
+  }
+  
+  // Media query for smaller screens
+  @media only screen and (max-width: 480px) {
+    .the-register .total-amount-text .actual-dollars {
+      font-size: 4em; /* Adjust the font size as needed */
+    }
+  }
+  

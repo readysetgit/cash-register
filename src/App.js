@@ -23,8 +23,8 @@ function App() {
   const [registerState, setRegisterState] = useState(initialRegisterState);
   const [transactionHistory, setTransactionHistory] = useState([]); // State to store transaction history
 
-  const addTransactionToHistory = (type, amount) => {
-    const transaction = { type, amount, timestamp: new Date().toLocaleString() }; // Add a timestamp
+  const addTransactionToHistory = (type, amount, changeInAmount) => {
+    const transaction = { type, amount, changeInAmount, timestamp: new Date().toLocaleString() }; // Add a timestamp
     setTransactionHistory([...transactionHistory, transaction]);
   };
 
@@ -35,10 +35,12 @@ function App() {
       updatedDenominations[denomination] += parseInt(amountsToAdd[denomination], 10);
     }
 
+
     const updatedTotal = calculateTotal(updatedDenominations);
+    const changeInAmount = calculateTotal(amountsToAdd)
 
     setRegisterState({ total: updatedTotal, denominations: updatedDenominations });
-    addTransactionToHistory('Added', calculateTotal(updatedDenominations));
+    addTransactionToHistory('Added', updatedTotal, changeInAmount);
     successToast('Added money to the register!')
   };
 
@@ -50,9 +52,10 @@ function App() {
     }
 
     const updatedTotal = calculateTotal(updatedDenominations);
+    const changeInAmount = calculateTotal(amountsToRemove)
 
     setRegisterState({ total: updatedTotal, denominations: updatedDenominations });
-    addTransactionToHistory('Removed', calculateTotal(updatedDenominations));
+    addTransactionToHistory('Removed', calculateTotal(updatedDenominations), changeInAmount);
     successToast('Money removed from register!')
   };
 
@@ -71,7 +74,6 @@ function App() {
 
     // Create an array of available denominations sorted in descending order
     const sortedDenominations = Object.keys(availableDenominations).map(Number).sort((a, b) => b - a);
-    console.log(sortedDenominations)
     for (const denomination of sortedDenominations) {
       if (changeAmount <= 0) break; // Stop if we've dispensed the required change
   
@@ -95,7 +97,8 @@ function App() {
       total: registerState.total - amountToRemove,
       denominations: availableDenominations, // Update denominations here
     });
-    addTransactionToHistory('Change', amountToRemove);
+
+    addTransactionToHistory('Change', amountToRemove, changeAmount);
     successToast('Change Dispensed!')
 
   };
